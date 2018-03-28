@@ -1,0 +1,11 @@
+{
+  "name": "ciri-auth",
+  "version": "0.0.1",
+  "description": "Ciri Auth",
+  "main": "index.js",
+  "author": "Jeff Lai",
+  "license": "MIT",
+  "dependencies": {
+    "jsonwebtoken": "^8.2.0"
+  }
+}
