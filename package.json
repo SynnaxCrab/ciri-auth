@@ -3,9 +3,29 @@
   "version": "0.0.1",
   "description": "Ciri Auth",
   "main": "index.js",
+  "scripts": {
+    "build": "babel src --out-dir dist",
+    "start": "node dist/app.js",
+    "dev": "nodemon index.js"
+  },
   "author": "Jeff Lai",
   "license": "MIT",
   "dependencies": {
-    "jsonwebtoken": "^8.2.0"
+    "jsonwebtoken": "^8.2.0",
+    "koa": "^2.5.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-passport": "^4.0.1",
+    "koa-router": "^7.4.0",
+    "koa-session": "^5.8.1",
+    "passport-twitter": "^1.0.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-register": "^6.26.0",
+    "eslint": "^4.19.1",
+    "nodemon": "^1.17.3",
+    "prettier": "1.11.1"
   }
 }
