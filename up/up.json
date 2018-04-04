@@ -4,5 +4,13 @@
   "regions": ["us-west-2"],
   "proxy": {
     "command": "node server.js"
+  },
+  "stages": {
+    "production": {
+      "domain": "auth.memors.me"
+    },
+    "staging": {
+      "domain": "auth-staging.memors.me"
+    }
   }
 }
