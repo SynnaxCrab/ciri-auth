@@ -3,17 +3,43 @@ import koaRouter from 'koa-router'
 import session from 'koa-session'
 import bodyParser from 'koa-bodyparser'
 import passport from 'koa-passport'
+import { Strategy } from 'passport-twitter'
 
 const app = new Koa()
 const router = new koaRouter()
 const { PORT = 3000 } = process.env
+console.log(process.env.TWITTER_COMSUMER_KEY)
+passport.use(
+  new Strategy(
+    {
+      consumerKey: process.env.TWITTER_COMSUMER_KEY,
+      consumerSecret: process.env.TWITTER_COMSUMER_SECRET,
+      callbackURL: 'http://127.0.0.1:3000/auth/twitter/callback',
+    },
+    function(token, tokenSecret, profile, cb) {
+      User.findOrCreate({ twitterId: profile.id }, function(err, user) {
+        return cb(err, user)
+      })
+    },
+  ),
+)
 
-app.use(async (ctx, next) => {
-  const start = Date.now()
-  await next()
-  const ms = Date.now() - start
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-})
+router.get('/auth/twitter', passport.authenticate('twitter'))
+router.get(
+  '/auth/twitter/callback',
+  passport.authenticate('twitter', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/')
+  },
+)
+
+app.use(bodyParser())
+app.keys = ['secret']
+app.use(session({}, app))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(router.routes())
+app.use(router.allowedMethods())
 
 app.use(ctx => {
   ctx.body = 'Hello Koa'

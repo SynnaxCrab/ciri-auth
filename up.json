@@ -2,8 +2,11 @@
   "name": "ciri-auth",
   "profile": "lambda",
   "regions": ["us-west-2"],
+  "hook": {
+    "build": "yarn build"
+  },
   "proxy": {
-    "command": "node server.js"
+    "command": "node dist/server.js"
   },
   "stages": {
     "production": {
@@ -11,6 +14,11 @@
     },
     "staging": {
       "domain": "auth-staging.memors.me"
+    },
+    "development": {
+      "proxy": {
+        "command": "nodemon index.js"
+      }
     }
   }
 }
