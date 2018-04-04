@@ -2,7 +2,7 @@
   "name": "ciri-auth",
   "profile": "lambda",
   "regions": ["us-west-2"],
-  "hooks": {
-    "build": "yarn build"
+  "proxy": {
+    "command": "node server.js"
   }
 }
