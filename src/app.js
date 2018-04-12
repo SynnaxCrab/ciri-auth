@@ -19,7 +19,8 @@ passport.use(
       callbackURL: 'http://127.0.0.1:3000/auth/twitter/callback',
     },
     function(token, tokenSecret, profile, cb) {
-      console.log(profile.emails)
+      console.log(profile._json.email)
+      return cb()
       User.findOrCreate({ twitterId: profile.id }, function(err, user) {
         return cb(err, user)
       })
