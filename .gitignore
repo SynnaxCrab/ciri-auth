@@ -3,3 +3,4 @@ dist
 yarn-error.log
 up
 .env
+server.js

@@ -4,7 +4,7 @@
   "description": "Ciri Auth",
   "main": "index.js",
   "scripts": {
-    "build": "browserify --node src/app.js -o dist/server.js -t babelify",
+    "build:up": "browserify --node src/app.js -o server.js -t babelify",
     "start": "node dist/app.js",
     "dev": "nodemon -r dotenv/config index.js"
   },

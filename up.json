@@ -3,10 +3,11 @@
   "profile": "lambda",
   "regions": ["us-west-2"],
   "hook": {
-    "build": "yarn build"
+    "build": "yarn build:up",
+    "clean": "rm server.js"
   },
   "proxy": {
-    "command": "node dist/server.js"
+    "command": "node server.js"
   },
   "stages": {
     "production": {
