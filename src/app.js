@@ -68,7 +68,8 @@ app.use(router.routes())
 app.use(router.allowedMethods())
 
 app.use(ctx => {
-  ctx.body = 'Hello Koa'
+  const body = ctx.isAuthenticated() ? 'hello koa' : '401'
+  ctx.body = body
 })
 
 app.listen(PORT)
