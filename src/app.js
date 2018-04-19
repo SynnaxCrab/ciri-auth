@@ -5,7 +5,7 @@ import bodyParser from 'koa-bodyparser'
 import passport from 'koa-passport'
 import { Strategy } from 'passport-twitter'
 
-import { findOrCreateByTwitter } from './db'
+import { findUserByUuid, findOrCreateByTwitter } from './db'
 
 const app = new Koa()
 const router = new koaRouter()
@@ -27,21 +27,37 @@ passport.use(
         twitterId: profileJson.id,
         email: profileJson.email,
       }
-      const user = await findOrCreateByTwitter(params)
-      console.log(user)
-      return cb()
+      try {
+        const { rows } = await findOrCreateByTwitter(params)
+        return cb(null, rows[0])
+      } catch (e) {
+        return cb(e)
+      }
     },
   ),
 )
 
+passport.serializeUser((user, done) => {
+  done(null, user.uuid)
+})
+
+passport.deserializeUser(async (uuid, done) => {
+  const { rows } = await findUserByUuid(uuid)
+  done(null, rows[0])
+})
+
 router.get('/auth/twitter', passport.authenticate('twitter'))
-router.get(
-  '/auth/twitter/callback',
-  passport.authenticate('twitter', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/')
-  },
-)
+
+router.get('/auth/twitter/callback', (ctx, next) => {
+  return passport.authenticate(
+    'twitter',
+    { failureRedirect: '/login' },
+    (err, user, info) => {
+      ctx.login(user)
+      ctx.redirect('/')
+    },
+  )(ctx)
+})
 
 app.use(bodyParser())
 app.keys = ['secret']

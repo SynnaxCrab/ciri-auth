@@ -35,6 +35,14 @@ const userSQL = id => sql`
   ${WHERE({ id })}
 `
 
+const userSQLByUuid = uuid => sql`
+  SELECT *
+  FROM users
+  ${WHERE({ uuid })}
+`
+
+export const findUserByUuid = async uuid => pool.query(userSQLByUuid(uuid))
+
 export const findOrCreateByTwitter = async ({ twitterId, email, name }) => {
   const client = await pool.connect()
   try {
