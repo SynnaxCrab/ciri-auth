@@ -5,6 +5,8 @@ import bodyParser from 'koa-bodyparser'
 import passport from 'koa-passport'
 import { Strategy } from 'passport-twitter'
 
+import { findOrCreateByTwitter } from './db'
+
 const app = new Koa()
 const router = new koaRouter()
 const { PORT = 3000 } = process.env
@@ -18,12 +20,16 @@ passport.use(
         'https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true',
       callbackURL: 'http://127.0.0.1:3000/auth/twitter/callback',
     },
-    function(token, tokenSecret, profile, cb) {
-      console.log(profile._json.email)
+    async function(token, tokenSecret, profile, cb) {
+      const profileJson = profile._json
+      const params = {
+        name: profileJson.screen_name,
+        twitterId: profileJson.id,
+        email: profileJson.email,
+      }
+      const user = await findOrCreateByTwitter(params)
+      console.log(user)
       return cb()
-      User.findOrCreate({ twitterId: profile.id }, function(err, user) {
-        return cb(err, user)
-      })
     },
   ),
 )
