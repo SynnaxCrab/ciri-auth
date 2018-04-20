@@ -1,9 +1,11 @@
+import Debug from 'debug'
 import koaRouter from 'koa-router'
 import passport from 'koa-passport'
 import { Strategy } from 'passport-twitter'
 
 import { findUserByUuid, findOrCreateUserByTwitter } from './db'
 
+const debug = Debug('auth')
 const router = new koaRouter()
 
 passport.use(
@@ -26,6 +28,7 @@ passport.use(
         const user = await findOrCreateUserByTwitter(params)
         return cb(null, user)
       } catch (e) {
+        debug(e)
         return cb(e)
       }
     },
