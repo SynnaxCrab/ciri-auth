@@ -2,7 +2,7 @@ import koaRouter from 'koa-router'
 import passport from 'koa-passport'
 import { Strategy } from 'passport-twitter'
 
-import { findUserByUuid, findOrCreateByTwitter } from './db'
+import { findUserByUuid, findOrCreateUserByTwitter } from './db'
 
 const router = new koaRouter()
 
@@ -23,8 +23,8 @@ passport.use(
         email: profileJson.email,
       }
       try {
-        const { rows } = await findOrCreateByTwitter(params)
-        return cb(null, rows[0])
+        const user = await findOrCreateUserByTwitter(params)
+        return cb(null, user)
       } catch (e) {
         return cb(e)
       }
@@ -37,8 +37,8 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser(async (uuid, done) => {
-  const { rows } = await findUserByUuid(uuid)
-  done(null, rows[0])
+  const user = await findUserByUuid(uuid)
+  done(null, user)
 })
 
 router.get('/auth/twitter', passport.authenticate('twitter'))
