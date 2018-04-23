@@ -15,7 +15,7 @@ passport.use(
       consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
       userProfileURL:
         'https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true',
-      callbackURL: 'http://127.0.0.1:3000/auth/twitter/callback',
+      callbackURL: process.env.TWITTER_CALLBACK_URL,
     },
     async function(token, tokenSecret, profile, cb) {
       const profileJson = profile._json
@@ -52,7 +52,8 @@ router.get('/auth/twitter/callback', (ctx, next) => {
     { failureRedirect: '/login' },
     (err, user, info) => {
       ctx.login(user)
-      ctx.redirect('/')
+      ctx.cookies.set('access_token', '1234567', { domain: 'memors.me' })
+      ctx.redirect('https://app-staging.memors.me')
     },
   )(ctx)
 })
