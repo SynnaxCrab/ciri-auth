@@ -53,7 +53,7 @@ router.get('/auth/twitter/callback', (ctx, next) => {
     (err, user, info) => {
       ctx.login(user)
       ctx.cookies.set('access_token', '1234567', { domain: 'memors.me' })
-      ctx.redirect('https://app-staging.memors.me')
+      ctx.redirect(process.env.APP_URL)
     },
   )(ctx)
 })
