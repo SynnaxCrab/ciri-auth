@@ -11,7 +11,7 @@ const app = new Koa()
 const { PORT = 3000 } = process.env
 
 app.use(bodyParser())
-app.keys = ['secret']
+app.keys = [process.env.SECRET]
 app.use(session({}, app))
 app.use(passport.initialize())
 app.use(passport.session())
