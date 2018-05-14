@@ -56,8 +56,8 @@ export const findUserByUuid = async uuid => {
 export const findOrCreateUserByTwitter = async ({ twitterId, email, name }) => {
   const client = await pool.connect()
   try {
+    let userId
     const { rows } = await client.query(identityExistsSQL(twitterId))
-    let userId = rows[0].user_id
 
     if (!rows.length) {
       await client.query('BEGIN')
@@ -72,6 +72,8 @@ export const findOrCreateUserByTwitter = async ({ twitterId, email, name }) => {
         }),
       )
       await client.query('COMMIT')
+    } else {
+      userId = rows[0].user_id
     }
 
     const { rows: userRows } = await client.query(userSQL(userId))
