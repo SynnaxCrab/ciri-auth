@@ -5,6 +5,10 @@
   "environment": {
     "DEBUG": "app,db,auth"
   },
+  "logs": {
+    "stdout": "info",
+    "stderr": "info"
+  },
   "hooks": {
     "build": "yarn build:up",
     "clean": "rm server.js"
