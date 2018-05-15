@@ -5,6 +5,7 @@ import bodyParser from 'koa-bodyparser'
 import passport from 'koa-passport'
 
 import auth from './auth'
+import accessToken from './access_token'
 
 const debug = Debug('app')
 const app = new Koa()
@@ -17,10 +18,14 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(auth.routes())
 app.use(auth.allowedMethods())
+app.use(accessToken())
 
 app.use(ctx => {
-  const body = ctx.isAuthenticated() ? 'hello koa' : '401'
-  ctx.body = body
+  if (ctx.isAuthenticated()) {
+    ctx.redirect(process.env.APP_URL)
+  } else {
+    ctx.body = 401
+  }
 })
 
 app.listen(PORT)

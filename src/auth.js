@@ -4,7 +4,6 @@ import passport from 'koa-passport'
 import { Strategy } from 'passport-twitter'
 
 import { findUserByUuid, findOrCreateUserByTwitter } from './db'
-import accessToken from './access_token'
 
 const debug = Debug('auth')
 const router = new koaRouter()
@@ -51,16 +50,11 @@ router.get('/auth/twitter/callback', (ctx, next) => {
   return passport.authenticate(
     'twitter',
     { failureRedirect: '/login' },
-    (err, user, info) => {
+    async (err, user, info) => {
+      console.log(err)
+      console.log(user)
       ctx.login(user)
-      ctx.cookies.set('access_token', accessToken(user), {
-        domain: process.domain,
-        signed: true,
-        // TODO: set them to true in production & staging
-        // secure: true,
-        // httpOnly: true,
-      })
-      ctx.redirect(process.env.APP_URL)
+      await next()
     },
   )(ctx)
 })
