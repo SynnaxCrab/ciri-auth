@@ -14,7 +14,7 @@
       "domain": "auth.memors.me"
     },
     "staging": {
-      "domain": "auth-staging.memors.me"
+      "domain": "auth0.memors.me"
     },
     "development": {
       "proxy": {
