@@ -10,12 +10,11 @@ const debug = Debug('db')
 const QUERY = async (sql, client = pool) => {
   try {
     const { rows } = await client.query(sql)
+    return rows
   } catch (e) {
     debug(e)
     throw e
   }
-
-  return rows
 }
 /**
  * Identity exists check SQL
@@ -60,6 +59,7 @@ const createIdentitySQL = ({ uid, userId, provider }) => sql`
     provider,
     user_id: userId,
   })}
+  RETURNING id
 `
 /**
  * Create Identity
@@ -93,7 +93,7 @@ const createUserSQL = ({ email, name }) => sql`
  */
 
 export const createUser = async (data, client = pool) => {
-  const { rows } = await QUERY(createUserSQL(data, client))
+  const rows = await QUERY(createUserSQL(data, client))
   return rows[0]
 }
 
@@ -118,7 +118,7 @@ const userSQL = id => sql`
  */
 
 export const findUser = async id => {
-  const { rows } = await QUERY(userSQL(id))
+  const rows = await QUERY(userSQL(id))
   return rows[0]
 }
 
@@ -142,7 +142,7 @@ const userSQLByUuid = uuid => sql`
  */
 
 const findUserByUuid = async uuid => {
-  const { rows } = await QUERY(userSQLByUuid(uuid))
+  const rows = await QUERY(userSQLByUuid(uuid))
   return rows[0]
 }
 
@@ -151,17 +151,20 @@ export const findOrCreateUserByGithub = async ({ node_id, email, name }) => {
   try {
     const userId = await identityExists(node_id, 'github')
 
-    if (!userId) {
+    if (userId) {
+      return await findUser(userId, client)
+    } else {
       await client.query('BEGIN')
-      const { id: createdUserId } = await createUser({ email, name }, client)
+      const createdUser = await createUser({ email, name }, client)
       await createIdentity(
         {
           uid: node_id,
-          userId: createdUserId,
+          userId: createdUser.id,
         },
         client,
       )
       await client.query('COMMIT')
+      return createdUser
     }
   } catch (e) {
     await client.query('ROLLBACK')
