@@ -47,8 +47,8 @@ router.get('/github/callback', async (ctx, next) => {
     )
     const userInfo = await res.json()
     const user = await findOrCreateUserByGithub(userInfo)
-    console.log(user)
     ctx.user = user
+    ctx.session.user = user.uuid
   } catch (e) {
     console.error(e)
   }

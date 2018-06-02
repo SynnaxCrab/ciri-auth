@@ -141,7 +141,7 @@ const userSQLByUuid = uuid => sql`
  * @returns {Object}
  */
 
-const findUserByUuid = async uuid => {
+export const findUserByUuid = async uuid => {
   const rows = await QUERY(userSQLByUuid(uuid))
   return rows[0]
 }
