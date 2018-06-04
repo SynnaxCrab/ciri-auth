@@ -4,7 +4,8 @@
   "description": "Ciri Auth",
   "main": "index.js",
   "scripts": {
-    "build:up": "babel src --out-dir dist",
+    "build:up":
+      "browserify src/app.js --node -u pg-native -u encoding -t babelify > server.js ",
     "start": "node dist/app.js",
     "dev": "nodemon -r dotenv/config index.js"
   },
