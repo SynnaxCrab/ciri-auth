@@ -5,13 +5,16 @@ export const accessToken = user =>
 
 export default () => {
   return async function(ctx, next) {
-    ctx.cookies.set('access_token', accessToken(ctx.user), {
-      domain: process.domain,
-      signed: true,
-      // TODO: set them to true in production & staging
-      // secure: true,
-      // httpOnly: true,
-    })
+    if (ctx.user) {
+      ctx.cookies.set('access_token', accessToken(ctx.user), {
+        domain: process.domain,
+        signed: true,
+        // TODO: set them to true in production & staging
+        // secure: true,
+        // httpOnly: true,
+      })
+    }
+
     await next()
   }
 }
