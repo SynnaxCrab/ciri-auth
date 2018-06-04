@@ -5,7 +5,7 @@ export const accessToken = user =>
 
 export default () => {
   return async function(ctx, next) {
-    ctx.cookies.set('access_token', accessToken(ctx.state.user), {
+    ctx.cookies.set('access_token', accessToken(ctx.user), {
       domain: process.domain,
       signed: true,
       // TODO: set them to true in production & staging
