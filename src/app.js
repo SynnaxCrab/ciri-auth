@@ -4,7 +4,8 @@ import session from 'koa-session'
 import bodyParser from 'koa-bodyparser'
 import passport from 'koa-passport'
 
-import auth from './auth'
+import userSession from './user_session'
+import github from './github'
 import accessToken from './access_token'
 
 const debug = Debug('app')
@@ -13,15 +14,14 @@ const { PORT = 3000 } = process.env
 
 app.use(bodyParser())
 app.keys = [process.env.SECRET]
+app.use(github.routes())
+app.use(github.allowedMethods())
 app.use(session({}, app))
-app.use(passport.initialize())
-app.use(passport.session())
-app.use(auth.routes())
-app.use(auth.allowedMethods())
+app.use(userSession())
 app.use(accessToken())
 
 app.use(ctx => {
-  if (ctx.isAuthenticated()) {
+  if (ctx.user) {
     ctx.redirect(process.env.APP_URL)
   } else {
     ctx.body = 401
