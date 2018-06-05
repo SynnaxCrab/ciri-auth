@@ -5,10 +5,13 @@ before_install:
   - curl -sf https://up.apex.sh/install | sudo sh
   - sudo up upgrade
 
+install:
+  - yarn
+
 cache: yarn
 
 script:
-  - yarn test
+  - echo "No test for now"
 
 deploy:
   provider: script
