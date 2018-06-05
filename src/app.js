@@ -2,7 +2,6 @@ import Debug from 'debug'
 import Koa from 'koa'
 import session from 'koa-session'
 import bodyParser from 'koa-bodyparser'
-import passport from 'koa-passport'
 
 import userSession from './user_session'
 import github from './github'
