@@ -1,0 +1,22 @@
+sudo: required
+language: node_js
+
+before_install:
+  - curl -sf https://up.apex.sh/install | sudo sh
+  - sudo up upgrade
+
+cache: yarn
+
+script:
+  - yarn test
+
+deploy:
+  provider: script
+  script: up -v && up deploy production -v
+  skip_cleanup: true
+  on:
+    branch: master
+
+env:
+  global:
+    AWS_REGION: us-west-2
