@@ -83,7 +83,7 @@ const createUserSQL = ({ email, name }) => sql`
     email,
     name,
   })}
-  RETURNING id
+  RETURNING id, uuid
 `
 /**
  * Create User
