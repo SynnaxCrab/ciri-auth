@@ -159,6 +159,7 @@ export const findOrCreateUserByGithub = async ({ node_id, email, name }) => {
       await createIdentity(
         {
           uid: node_id,
+          provider: 'github',
           userId: createdUser.id,
         },
         client,
