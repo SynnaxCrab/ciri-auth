@@ -4,7 +4,8 @@ import oauth2 from 'simple-oauth2'
 import fetch from 'node-fetch'
 
 import randomToken from './utils/token'
-import { findUserByUuid, findOrCreateUserByGithub } from './db'
+import { findUserByUuid } from './db/user'
+import { findOrCreateUserByGithub } from './db/github'
 
 const debug = Debug('auth:github')
 const router = new koaRouter()
