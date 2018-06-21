@@ -2,12 +2,6 @@
   "name": "ciri-auth",
   "profile": "lambda",
   "regions": ["us-west-2"],
-  "lambda": {
-    "vpc": {
-      "securityGroups": ["sg-c3a551bf"],
-      "subnets": ["subnet-ec2c5da4", "subnet-bc2677da", "subnet-0ac3d651"]
-    }
-  },
   "hooks": {
     "build": "yarn build:up",
     "clean": "rm server.js"
