@@ -9,10 +9,10 @@ const pool = new Pool()
 export const findOrCreateUserByGithub = async ({ node_id, email, name }) => {
   const client = await pool.connect()
   try {
-    const { user_id: userId } = await identityExists(node_id, 'github')
+    const identity = await identityExists(node_id, 'github')
 
-    if (userId) {
-      return await findUser(userId, client)
+    if (identity) {
+      return await findUser(identity.user_id, client)
     } else {
       await client.query('BEGIN')
       const createdUser = await createUser({ email, name }, client)
