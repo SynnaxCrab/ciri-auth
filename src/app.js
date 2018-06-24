@@ -22,13 +22,13 @@ app.use(session({}, app))
 app.use(userSession())
 app.use(accessToken())
 
-app.use(ctx => {
-  if (ctx.user) {
-    ctx.redirect(process.env.APP_URL)
-  } else {
-    ctx.body = 401
-  }
-})
+// app.use(ctx => {
+//   if (ctx.user) {
+//     ctx.redirect(process.env.APP_URL)
+//   } else {
+//     ctx.body = 401
+//   }
+// })
 
 app.listen(PORT)
 debug(`Listening on PORT: ${PORT}`)

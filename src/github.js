@@ -6,6 +6,7 @@ import fetch from 'node-fetch'
 import randomToken from './utils/token'
 import { findUserByUuid } from './db/user'
 import { findOrCreateUserByGithub } from './db/github'
+import { authorize } from './oauth2'
 
 const debug = Debug('auth:github')
 const router = new koaRouter()
@@ -22,15 +23,10 @@ const client = oauth2.create({
   },
 })
 
-const authorizationUri = client.authorizationCode.authorizeURL({
+export const authorizationUri = client.authorizationCode.authorizeURL({
   redirect_uri: process.env.GITHUB_CALLBACK_URL,
   scope: 'notifications,repo',
-  state: randomToken,
-})
-
-router.get('/github', (ctx, next) => {
-  debug(authorizationUri)
-  ctx.redirect(authorizationUri)
+  state: randomToken(),
 })
 
 router.get('/github/callback', async (ctx, next) => {
@@ -49,12 +45,11 @@ router.get('/github/callback', async (ctx, next) => {
     const userInfo = await res.json()
     const user = await findOrCreateUserByGithub(userInfo)
     ctx.user = user
-    ctx.session.user = user.uuid
+    const authorizationCode = await authorize(ctx)
+    ctx.redirect(`${process.env.APP_URL}?code=${authorizationCode}`)
   } catch (e) {
     console.error(e)
   }
-
-  await next()
 })
 
 export default router
