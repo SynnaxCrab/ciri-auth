@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken'
 import OAuth2Server, { Request, Response } from 'oauth2-server'
 import koaRouter from 'koa-router'
 import * as oauth2Queries from './db/oauth2'
@@ -50,6 +51,16 @@ router.get('/authorize', async ctx => {
   ctx.redirect(authorizationUri(provider))
 })
 
-router.post('/access_token', async (ctx, next) => {})
+router.post('/access_token', async (ctx, next) => {
+  const { request, response } = ctx
+  const { accessToken } = await oauth.token(
+    new Request(request),
+    new Response(response),
+  )
+  const access_token = jwt.sign({ accessToken }, process.env.SECRET, {
+    expiresIn: '1d',
+  })
+  ctx.body = { access_token }
+})
 
 export default router
