@@ -4,7 +4,8 @@
   "description": "Ciri Auth",
   "main": "index.js",
   "scripts": {
-    "build:up": "browserify src/app.js --node -u pg-native -u encoding -t babelify > server.js ",
+    "build:up":
+      "browserify src/app.js --node -u pg-native -u encoding -t babelify > server.js ",
     "start": "node dist/app.js",
     "dev": "nodemon -r dotenv/config index.js"
   },
@@ -16,7 +17,6 @@
     "koa": "^2.5.0",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.4.0",
-    "koa-session": "^5.8.1",
     "node-fetch": "^2.1.2",
     "oauth2-server": "^3.0.0",
     "pg": "^7.4.1",

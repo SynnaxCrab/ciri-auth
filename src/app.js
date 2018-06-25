@@ -1,11 +1,8 @@
 import Debug from 'debug'
 import Koa from 'koa'
-import session from 'koa-session'
 import bodyParser from 'koa-bodyparser'
 
-import userSession from './user_session'
 import github from './github'
-import accessToken from './access_token'
 import oauth2 from './oauth2'
 
 const debug = Debug('app')
@@ -18,9 +15,6 @@ app.use(github.routes())
 app.use(github.allowedMethods())
 app.use(oauth2.routes())
 app.use(oauth2.allowedMethods())
-app.use(session({}, app))
-app.use(userSession())
-app.use(accessToken())
 
 // app.use(ctx => {
 //   if (ctx.user) {
