@@ -46,7 +46,7 @@ router.get('/github/callback', async (ctx, next) => {
     const user = await findOrCreateUserByGithub(userInfo)
     ctx.user = user
     const authorizationCode = await authorize(ctx)
-    ctx.redirect(`${process.env.APP_URL}?code=${authorizationCode}`)
+    ctx.redirect(`${process.env.APP_CALLBACK_URL}?code=${authorizationCode}`)
   } catch (e) {
     console.error(e)
   }

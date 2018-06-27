@@ -12,10 +12,11 @@ const oauth = new OAuth2Server({
 export const authorize = async ctx => {
   // TODO: see if we can persist this across request somehow
   ctx.query = {
-    client_id: 'xxxx',
+    client_id: 'c283ef876656a427af9f0d9c959df1c6c52341b9',
     state: 'uuu',
     response_type: 'code',
     grant: 'authorization_code',
+    redirect_uri: 'http://127.0.0.1:4000',
   }
 
   const { request, response } = ctx
