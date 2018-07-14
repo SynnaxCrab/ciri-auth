@@ -10,7 +10,7 @@ const oauth = new OAuth2Server({
 })
 
 export const authorize = async ctx => {
-  // TODO: see if we can persist this across request somehow
+  // TODO: use db to access special oauth client used for ourselves
   ctx.query = {
     client_id: 'c283ef876656a427af9f0d9c959df1c6c52341b9',
     state: 'uuu',
@@ -21,16 +21,11 @@ export const authorize = async ctx => {
 
   const { request, response } = ctx
   if (ctx.user) {
-    const code = await oauth.authorize(
-      new Request(request),
-      new Response(response),
-      {
-        authenticateHandler: {
-          handle: () => ctx.user,
-        },
+    return await oauth.authorize(new Request(request), new Response(response), {
+      authenticateHandler: {
+        handle: () => ctx.user,
       },
-    )
-    return code.authorizationCode
+    })
   } else {
     return null
   }
