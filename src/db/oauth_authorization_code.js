@@ -12,6 +12,16 @@ export const createAuthorizationCode = async values => {
   return rows[0]
 }
 
+const deleteAuthorizationCodeSQL = code => sql`
+  DELETE FROM oauth_authorization_codes
+  ${WHERE({ code })}
+`
+
+export const deleteAuthorizationCode = async code => {
+  await QUERY(deleteAuthorizationCodeSQL(code))
+  return true
+}
+
 const authorizationCodeSQL = code => sql`
   SELECT *
   FROM oauth_authorization_codes

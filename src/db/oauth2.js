@@ -7,6 +7,7 @@ import { findClient } from './oauth_client'
 import {
   findAuthorizationCode,
   createAuthorizationCode,
+  deleteAuthorizationCode,
 } from './oauth_authorization_code'
 
 /**
@@ -69,9 +70,9 @@ export const getAuthorizationCode = async code => {
   }
 }
 
-export const revokeAuthorizationCode = code => {
+export const revokeAuthorizationCode = async ({ code }) => {
   console.log('revokeAuthorizationCode')
-  return true
+  return await deleteAuthorizationCode(code)
 }
 
 export const saveToken = (token, client, user) => {
