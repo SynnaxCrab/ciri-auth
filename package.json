@@ -22,7 +22,7 @@
     "pg": "^7.4.1",
     "pg-sql": "^1.1.0",
     "pg-sql-helpers": "^0.1.7",
-    "simple-oauth2": "^1.5.2",
+    "simple-oauth2": "^2.2.0",
     "uuid": "^3.2.1"
   },
   "devDependencies": {
@@ -33,9 +33,9 @@
     "babel-register": "^6.26.0",
     "babelify": "^8.0.0",
     "browserify": "^16.1.1",
-    "dotenv": "^5.0.1",
-    "eslint": "^4.19.1",
+    "dotenv": "^6.0.0",
+    "eslint": "^5.1.0",
     "nodemon": "^1.17.3",
-    "prettier": "1.11.1"
+    "prettier": "1.13.7"
   }
 }
