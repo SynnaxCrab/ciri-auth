@@ -10,13 +10,12 @@ const oauth = new OAuth2Server({
 })
 
 export const authorize = async ctx => {
-  // TODO: use db to access special oauth client used for ourselves
+  // TODO: make the system oauth client more special
+  const clientId = 'c283ef876656a427af9f0d9c959df1c6c52341b9'
   ctx.query = {
-    client_id: 'c283ef876656a427af9f0d9c959df1c6c52341b9',
-    state: 'uuu',
+    client_id: clientId,
+    state: 'uuuuu',
     response_type: 'code',
-    grant: 'authorization_code',
-    redirect_uri: 'http://127.0.0.1:4000',
   }
 
   const { request, response } = ctx
