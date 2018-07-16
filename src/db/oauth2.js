@@ -19,6 +19,7 @@ import {
  */
 
 export const getClient = async (clientId, clientSecret) => {
+  console.log('getClient')
   const client = await findClient(clientId, clientSecret)
 
   if (client) {
@@ -35,6 +36,7 @@ export const getClient = async (clientId, clientSecret) => {
 }
 
 export const saveAuthorizationCode = async (code, client, user) => {
+  console.log('saveAuthorizationCode')
   const values = {
     code: code.authorizationCode,
     expires_at: code.expiresAt,
@@ -82,9 +84,4 @@ export const saveToken = (token, client, user) => {
     client,
     user,
   }
-}
-
-export const getAccessToken = accessToken => {
-  console.log('getAccessToken')
-  return 1
 }
