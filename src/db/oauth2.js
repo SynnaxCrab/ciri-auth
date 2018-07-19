@@ -9,6 +9,7 @@ import {
   createAuthorizationCode,
   deleteAuthorizationCode,
 } from './oauth_authorization_code'
+import { createToken } from './oauth_token'
 
 /**
  * getClient oauth server model interface
@@ -77,11 +78,27 @@ export const revokeAuthorizationCode = async ({ code }) => {
   return await deleteAuthorizationCode(code)
 }
 
-export const saveToken = (token, client, user) => {
+export const saveToken = async (token, client, user) => {
   console.log('saveToken')
+  const values = {
+    access_token: token.accessToken,
+    expires_at: token.accessTokenExpiresAt,
+    scope: token.scope,
+    refresh_token: token.refreshToken,
+    refresh_token_expires_at: token.refreshTokenExpiresAt,
+    oauth_client_id: client.id,
+    user_id: user.id,
+  }
+
+  const createdToken = await createToken(values)
+
   return {
-    accessToken: token,
-    client,
-    user,
+    accessToken: createdToken.access_token,
+    accessTokenExpiresAt: createdToken.expires_at,
+    refreshToken: createdToken.refresh_token,
+    refreshTokenExpiresAt: createdToken.expires_at,
+    scope: createdToken.scope,
+    client: { id: createdToken.client_id },
+    user: { id: createdToken.user_id },
   }
 }
