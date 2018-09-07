@@ -31,7 +31,7 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-register": "^6.26.0",
-    "babelify": "^8.0.0",
+    "babelify": "^10.0.0",
     "browserify": "^16.1.1",
     "dotenv": "^6.0.0",
     "eslint": "^5.1.0",
