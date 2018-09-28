@@ -4,15 +4,14 @@
   "description": "Ciri Auth",
   "main": "index.js",
   "scripts": {
-    "build:up":
-      "browserify src/app.js --node -u pg-native -u encoding -t babelify > server.js ",
+    "build:up": "browserify src/app.js --node -u pg-native -u encoding -t babelify > server.js ",
     "start": "node dist/app.js",
     "dev": "nodemon -r dotenv/config index.js"
   },
   "author": "Jeff Lai",
   "license": "MIT",
   "dependencies": {
-    "debug": "^3.1.0",
+    "debug": "^4.0.1",
     "jsonwebtoken": "^8.2.0",
     "koa": "^2.5.0",
     "koa-bodyparser": "^4.2.0",
@@ -26,16 +25,16 @@
     "uuid": "^3.2.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-register": "^6.26.0",
-    "babelify": "^8.0.0",
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.1.0",
+    "@babel/register": "^7.0.0",
+    "babelify": "^10.0.0",
     "browserify": "^16.1.1",
     "dotenv": "^6.0.0",
     "eslint": "^5.1.0",
     "nodemon": "^1.17.3",
-    "prettier": "1.14.0"
+    "prettier": "1.14.3"
   }
 }
