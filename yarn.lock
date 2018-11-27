@@ -2387,7 +2387,6 @@ node-pre-gyp@^0.10.0:
 nodemon@^1.18.6:
   version "1.18.6"
   resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-1.18.6.tgz#89b1136634d6c0afc7de24cc932a760e999e2c76"
-  integrity sha512-4pHQNYEZun+IkIC2jCaXEhkZnfA7rQe73i8RkdRyDJls/K+WxR7IpI5uNUsAvQ0zWvYcCDNGD+XVtw2ZG86/uQ==
   dependencies:
     chokidar "^2.0.4"
     debug "^3.1.0"
@@ -2671,9 +2670,9 @@ pg-pool@~2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/pg-pool/-/pg-pool-2.0.3.tgz#c022032c8949f312a4f91fb6409ce04076be3257"
 
-pg-sql-helpers@^0.1.7:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/pg-sql-helpers/-/pg-sql-helpers-0.1.7.tgz#18ee471dc8cf45b18d3f5a0d0d7ea2e19afdeddf"
+pg-sql-helpers@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/pg-sql-helpers/-/pg-sql-helpers-0.2.0.tgz#5530429f20e218dfa9993101c802039b81e5dc42"
   dependencies:
     is "^3.2.1"
     is-plain-object "^2.0.4"
