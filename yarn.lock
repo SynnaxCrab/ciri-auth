@@ -2671,9 +2671,10 @@ pg-pool@~2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/pg-pool/-/pg-pool-2.0.3.tgz#c022032c8949f312a4f91fb6409ce04076be3257"
 
-pg-sql-helpers@^0.1.7:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/pg-sql-helpers/-/pg-sql-helpers-0.1.7.tgz#18ee471dc8cf45b18d3f5a0d0d7ea2e19afdeddf"
+pg-sql-helpers@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/pg-sql-helpers/-/pg-sql-helpers-0.3.1.tgz#2cda70cb3ed05ad0941a53e238c47e1d5bf5b4ff"
+  integrity sha512-NMnCzI5qKJiVDNpFANEf0LphcyghkfCwo00TajplA+FvXW6iOBIOeT4TjSC3fH0AQ2duXGd+YfEImkG0zlpqGg==
   dependencies:
     is "^3.2.1"
     is-plain-object "^2.0.4"
@@ -2776,9 +2777,10 @@ prepend-http@^1.0.1:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
 
-prettier@1.15.2:
-  version "1.15.2"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.15.2.tgz#d31abe22afa4351efa14c7f8b94b58bb7452205e"
+prettier@1.15.3:
+  version "1.15.3"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.15.3.tgz#1feaac5bdd181237b54dbe65d874e02a1472786a"
+  integrity sha512-gAU9AGAPMaKb3NNSUUuhhFAS7SCO4ALTN4nRIn6PJ075Qd28Yn2Ig2ahEJWdJwJmlEBTUfC7mMUSFy8MwsOCfg==
 
 process-nextick-args@~2.0.0:
   version "2.0.0"
