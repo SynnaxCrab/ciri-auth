@@ -15,7 +15,7 @@
     "jsonwebtoken": "^8.2.0",
     "koa": "^2.5.0",
     "koa-bodyparser": "^4.2.0",
-    "koa-router": "^7.4.0",
+    "koa-router": "^8.0.7",
     "node-fetch": "^2.1.2",
     "oauth2-server": "^3.0.0",
     "pg": "^7.4.1",
